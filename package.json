@@ -1,0 +1,24 @@
+{
+  "name": "bitesync",
+  "version": "1.0.0",
+  "description": "BiteSync — Smart Hostel Canteen Pre-Ordering Platform",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "seed": "cd backend && npm run seed",
+    "test": "cd backend && npm test",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "canteen",
+    "pre-ordering",
+    "smart-canteen",
+    "hostel",
+    "react",
+    "express",
+    "mongodb",
+    "socketio"
+  ],
+  "author": "BiteSync Engineering Team",
+  "license": "MIT"
+}
