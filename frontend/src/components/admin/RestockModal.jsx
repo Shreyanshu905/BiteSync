@@ -122,3 +122,4 @@ const RestockModal = ({ isOpen, onClose, item, onRestocked }) => {
 };
 
 export default RestockModal;
+

@@ -60,3 +60,4 @@ pickupSlotSchema.set('toJSON', { virtuals: true });
 pickupSlotSchema.set('toObject', { virtuals: true });
 
 module.exports = mongoose.model('PickupSlot', pickupSlotSchema);
+

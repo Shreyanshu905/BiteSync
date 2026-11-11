@@ -64,3 +64,4 @@ inventoryItemSchema.set('toJSON', { virtuals: true });
 inventoryItemSchema.set('toObject', { virtuals: true });
 
 module.exports = mongoose.model('InventoryItem', inventoryItemSchema);
+

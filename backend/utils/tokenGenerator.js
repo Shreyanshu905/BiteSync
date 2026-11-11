@@ -53,3 +53,4 @@ module.exports = {
   generateQRPayload,
   verifyQRPayload,
 };
+

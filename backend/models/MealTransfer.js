@@ -42,3 +42,4 @@ const mealTransferSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('MealTransfer', mealTransferSchema);
+

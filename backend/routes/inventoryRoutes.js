@@ -18,3 +18,4 @@ router.put('/:id', authorize('admin'), updateInventoryItem);
 router.post('/:id/restock', authorize('admin', 'kitchen'), restockItem);
 
 module.exports = router;
+

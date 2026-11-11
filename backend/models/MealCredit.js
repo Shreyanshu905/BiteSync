@@ -45,3 +45,4 @@ const mealCreditSchema = new mongoose.Schema(
 mealCreditSchema.index({ student: 1, isActive: 1 });
 
 module.exports = mongoose.model('MealCredit', mealCreditSchema);
+

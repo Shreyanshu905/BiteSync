@@ -14,3 +14,4 @@ router.put('/:id', protect, authorize('admin'), updateAnnouncement);
 router.delete('/:id', protect, authorize('admin'), deleteAnnouncement);
 
 module.exports = router;
+

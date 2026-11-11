@@ -205,3 +205,4 @@ const ScannerCamera = ({ initialToken, onCollectedSuccess, onClose }) => {
 };
 
 export default ScannerCamera;
+

@@ -14,3 +14,4 @@ router.put('/:id', protect, authorize('admin'), updateSlot);
 router.patch('/:id/toggle-close', protect, authorize('admin', 'kitchen'), toggleCloseSlot);
 
 module.exports = router;
+

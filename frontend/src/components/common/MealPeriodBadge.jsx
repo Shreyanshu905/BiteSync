@@ -19,3 +19,4 @@ const MealPeriodBadge = ({ period }) => {
 };
 
 export default MealPeriodBadge;
+

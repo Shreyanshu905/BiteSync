@@ -51,3 +51,4 @@ const mealPlanSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('MealPlan', mealPlanSchema);
+

@@ -51,3 +51,4 @@ const StatusPill = ({ status }) => {
 };
 
 export default StatusPill;
+

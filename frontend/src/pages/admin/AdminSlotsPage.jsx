@@ -304,3 +304,4 @@ const AdminSlotsPage = () => {
 };
 
 export default AdminSlotsPage;
+

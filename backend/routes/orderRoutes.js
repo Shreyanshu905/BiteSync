@@ -23,3 +23,4 @@ router.patch('/:id/status', protect, authorize('admin', 'kitchen'), updateOrderS
 router.post('/:id/rate', protect, rateOrder);
 
 module.exports = router;
+

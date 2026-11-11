@@ -16,3 +16,4 @@ router.post('/:code/join', joinGroupOrder);
 router.post('/:code/items', addItemToGroup);
 
 module.exports = router;
+

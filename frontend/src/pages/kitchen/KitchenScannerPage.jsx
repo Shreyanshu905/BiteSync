@@ -34,3 +34,4 @@ const KitchenScannerPage = () => {
 };
 
 export default KitchenScannerPage;
+

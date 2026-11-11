@@ -19,3 +19,4 @@ router.patch('/:id/toggle-availability', protect, authorize('admin', 'kitchen'),
 router.delete('/:id', protect, authorize('admin'), deleteMenuItem);
 
 module.exports = router;
+

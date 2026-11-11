@@ -34,3 +34,4 @@ const mealSkipSchema = new mongoose.Schema(
 mealSkipSchema.index({ student: 1, date: 1, mealPeriod: 1 }, { unique: true });
 
 module.exports = mongoose.model('MealSkip', mealSkipSchema);
+

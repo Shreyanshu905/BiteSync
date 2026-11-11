@@ -18,3 +18,4 @@ router.get('/skipped-meals', protect, getSkippedMeals);
 router.post('/transfer-credits', protect, transferCredits);
 
 module.exports = router;
+

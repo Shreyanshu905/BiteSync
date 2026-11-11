@@ -117,3 +117,4 @@ const OrderCard = ({ order, onUpdateStatus, onOpenQRScanner }) => {
 };
 
 export default OrderCard;
+

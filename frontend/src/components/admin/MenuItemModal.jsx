@@ -288,3 +288,4 @@ const MenuItemModal = ({ isOpen, onClose, item, onSaved }) => {
 };
 
 export default MenuItemModal;
+

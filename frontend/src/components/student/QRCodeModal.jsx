@@ -71,3 +71,4 @@ const QRCodeModal = ({ isOpen, onClose, order }) => {
 };
 
 export default QRCodeModal;
+

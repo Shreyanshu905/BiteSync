@@ -40,3 +40,4 @@ test('QR Payload Signing and Verification', () => {
   const tamperedResult = verifyQRPayload(tamperedPayload);
   assert.equal(tamperedResult.valid, false, 'Tampered QR code signature must fail verification');
 });
+

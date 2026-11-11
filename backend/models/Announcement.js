@@ -64,3 +64,4 @@ const announcementSchema = new mongoose.Schema(
 announcementSchema.index({ isActive: 1, type: 1 });
 
 module.exports = mongoose.model('Announcement', announcementSchema);
+

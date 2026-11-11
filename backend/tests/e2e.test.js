@@ -169,3 +169,4 @@ test('End-to-End Order & Collection Lifecycle with Business Rules', async (t) =>
     assert.equal(fullSlotAttempt, null, 'Must reject booking when slot capacity is exhausted');
   });
 });
+

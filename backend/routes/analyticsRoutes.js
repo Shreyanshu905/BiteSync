@@ -19,3 +19,4 @@ router.get('/demand-prediction', getDemandPrediction);
 router.get('/waste-reduction', getWasteAnalytics);
 
 module.exports = router;
+

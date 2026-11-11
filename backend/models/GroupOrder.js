@@ -70,3 +70,4 @@ const groupOrderSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('GroupOrder', groupOrderSchema);
+

@@ -14,3 +14,4 @@ router.patch('/:id/read', markAsRead);
 router.post('/mark-all-read', markAllAsRead);
 
 module.exports = router;
+

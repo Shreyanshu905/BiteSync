@@ -128,3 +128,4 @@ const SlotSelector = ({ selectedSlotId, onSelectSlot, mealPeriod }) => {
 };
 
 export default SlotSelector;
+

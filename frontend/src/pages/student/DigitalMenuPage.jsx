@@ -176,3 +176,4 @@ const DigitalMenuPage = () => {
 };
 
 export default DigitalMenuPage;
+

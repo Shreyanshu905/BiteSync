@@ -133,3 +133,4 @@ const FoodCard = ({ dish }) => {
 };
 
 export default FoodCard;
+
