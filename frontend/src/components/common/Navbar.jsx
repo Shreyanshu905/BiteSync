@@ -144,14 +144,6 @@ const Navbar = () => {
               My Orders
             </Link>
             <Link
-              to="/student/meal-plans"
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                location.pathname === '/student/meal-plans' ? 'text-brand-600 bg-brand-50' : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
-              }`}
-            >
-              Meal Pass
-            </Link>
-            <Link
               to="/student/calendar"
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 location.pathname === '/student/calendar' ? 'text-brand-600 bg-brand-50' : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
@@ -426,13 +418,6 @@ const Navbar = () => {
                 className="block px-3 py-2 rounded-lg text-base font-medium text-stone-700 hover:bg-stone-50"
               >
                 Student Wallet (₹{user?.walletBalance || 0})
-              </Link>
-              <Link
-                to="/student/meal-plans"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-stone-700 hover:bg-stone-50"
-              >
-                Meal Subscription
               </Link>
               <Link
                 to="/student/calendar"

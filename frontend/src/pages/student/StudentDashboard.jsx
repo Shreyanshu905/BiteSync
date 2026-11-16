@@ -8,7 +8,6 @@ import StatusPill from '../../components/common/StatusPill';
 import QRCodeModal from '../../components/student/QRCodeModal';
 import {
   UtensilsCrossed,
-  Sparkles,
   ArrowRight,
   Wallet,
   Clock,
@@ -253,26 +252,8 @@ const StudentDashboard = () => {
         )}
       </div>
 
-      {/* Mess Menu & Meal Pass Highlights */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <Link
-          to="/student/meal-plans"
-          className="p-5 rounded-3xl bg-white border border-stone-100 shadow-soft hover:shadow-card transition-all flex flex-col justify-between group"
-        >
-          <div>
-            <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-base text-stone-900">Prepaid Mess Passes</h3>
-            <p className="text-xs text-stone-500 mt-1 leading-relaxed">
-              Save up to 25% on weekly and monthly mess plans with meal skip options.
-            </p>
-          </div>
-          <span className="text-xs font-bold text-emerald-600 mt-4 flex items-center gap-1">
-            View Plans & Credits →
-          </span>
-        </Link>
-
+      {/* Mess Calendar & Group Ordering Highlights */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Link
           to="/student/calendar"
           className="p-5 rounded-3xl bg-white border border-stone-100 shadow-soft hover:shadow-card transition-all flex flex-col justify-between group"

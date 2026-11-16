@@ -148,11 +148,7 @@ function App() {
                   />
                   <Route
                     path="/student/meal-plans"
-                    element={
-                      <ProtectedRoute allowedRoles={['student', 'admin', 'kitchen']}>
-                        <MealPlansPage />
-                      </ProtectedRoute>
-                    }
+                    element={<Navigate to="/student/dashboard" replace />}
                   />
                   <Route
                     path="/student/calendar"
