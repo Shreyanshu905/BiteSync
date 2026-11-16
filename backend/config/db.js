@@ -22,7 +22,11 @@ const connectDB = async () => {
       console.log('Spinning up embedded MongoDB Memory Server for seamless zero-config operation...');
       try {
         const { MongoMemoryServer } = require('mongodb-memory-server');
-        mongoMemoryServer = await MongoMemoryServer.create();
+        mongoMemoryServer = await MongoMemoryServer.create({
+          instance: {
+            launchTimeout: 60000,
+          },
+        });
         const memoryUri = mongoMemoryServer.getUri();
         await mongoose.connect(memoryUri);
         console.log(`MongoDB Connected successfully to in-memory instance: ${memoryUri}`);
