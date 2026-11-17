@@ -49,20 +49,20 @@ const CartPage = () => {
   // If cart is empty
   if (cartItems.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-        <div className="w-20 h-20 bg-amber-100 rounded-3xl flex items-center justify-center mx-auto text-amber-700 mb-4">
-          <ShoppingBag className="w-10 h-10" />
+      <div className="max-w-lg mx-auto px-4 py-20 text-center">
+        <div className="w-14 h-14 bg-cream-100 border border-stone-200/80 rounded-2xl flex items-center justify-center mx-auto text-stone-500 mb-4">
+          <ShoppingBag className="w-6 h-6" />
         </div>
-        <h2 className="text-2xl font-black text-stone-900">Your Cart is Empty</h2>
-        <p className="text-xs text-stone-500 mt-1 max-w-sm mx-auto">
-          Looks like you haven't added any dishes yet. Explore today's freshly prepared hostel menu!
+        <h2 className="text-lg font-semibold text-stone-900">Your order bag is empty</h2>
+        <p className="text-xs text-stone-500 mt-1.5 max-w-xs mx-auto leading-relaxed">
+          Browse today's canteen menu and add dishes to schedule a pickup slot.
         </p>
         <Link
           to="/student/menu"
-          className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl shadow-md transition-colors"
+          className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-stone-900 hover:bg-stone-800 text-white font-medium text-xs rounded-lg transition-colors"
         >
-          <span>Browse Canteen Menu</span>
-          <ArrowRight className="w-4 h-4" />
+          <span>Browse Menu</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
     );
@@ -105,19 +105,11 @@ const CartPage = () => {
 
       const res = await api.post('/orders', payload);
       if (res.data.success) {
-        // Trigger celebratory confetti
-        confetti({
-          particleCount: 100,
-          spread: 80,
-          origin: { y: 0.6 },
-        });
-
-        // Deduct from local wallet context if wallet payment
         if (paymentMethod === 'wallet') {
           updateWalletBalance((user?.walletBalance || 0) - finalTotal);
         }
 
-        toast.success('🎉 Meal pre-order placed successfully!');
+        toast.success('Meal pre-order placed successfully');
         clearCart();
         navigate(`/student/orders/${res.data.data._id}`);
       }
@@ -129,13 +121,13 @@ const CartPage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
-          Review Order & Select Pickup Slot 🛒
+        <h1 className="text-2xl font-semibold text-stone-900 tracking-tight">
+          Review Order & Pickup Slot
         </h1>
         <p className="text-xs sm:text-sm text-stone-500 mt-1">
-          Lock in your meal preparation and skip the queue counter.
+          Select a 15-minute pickup window and complete checkout.
         </p>
       </div>
 
@@ -143,17 +135,17 @@ const CartPage = () => {
         {/* Left 2 Cols: Cart Items & Slot Selector */}
         <div className="lg:col-span-2 space-y-6">
           {/* Cart Items List */}
-          <div className="bg-white rounded-3xl border border-stone-200/80 p-6 shadow-soft space-y-4">
+          <div className="bg-white rounded-2xl border border-stone-200/80 p-6 shadow-soft space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-stone-100">
-              <h2 className="font-bold text-sm uppercase tracking-wider text-stone-500">
+              <h2 className="font-semibold text-sm text-stone-900">
                 Selected Dishes ({cartItems.length})
               </h2>
               <button
                 onClick={clearCart}
-                className="text-xs text-red-600 hover:text-red-700 font-semibold flex items-center gap-1"
+                className="text-xs text-stone-500 hover:text-red-600 font-medium flex items-center gap-1 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
-                Clear Cart
+                Clear
               </button>
             </div>
 

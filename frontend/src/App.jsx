@@ -46,7 +46,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cream-50">
-        <div className="w-8 h-8 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-6 h-6 border-2 border-stone-300 border-t-stone-800 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -283,8 +283,8 @@ function App() {
             <Toaster
               position="top-right"
               toastOptions={{
-                className: 'rounded-2xl text-xs font-semibold shadow-xl border border-stone-100',
-                duration: 4000,
+                className: 'rounded-xl text-xs font-medium shadow-elevated border border-stone-200/80 bg-white text-stone-800',
+                duration: 3500,
               }}
             />
           </SocketProvider>

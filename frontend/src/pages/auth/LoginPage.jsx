@@ -44,91 +44,90 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-68px)] flex items-center justify-center p-4 bg-linear-to-b from-cream-100 to-amber-50/40">
-      <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-stone-200/80 shadow-card">
-        {/* Logo and Tagline */}
+    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-cream-50">
+      <div className="max-w-[400px] w-full bg-white rounded-2xl p-7 sm:p-8 border border-stone-200/80 shadow-card">
+        {/* Header */}
         <div className="text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-linear-to-tr from-brand-600 to-amber-500 mx-auto flex items-center justify-center text-white shadow-lg shadow-brand-500/25 mb-3">
-            <UtensilsCrossed className="w-7 h-7" />
+          <div className="w-10 h-10 rounded-xl bg-stone-900 mx-auto flex items-center justify-center text-cream-50 mb-3.5">
+            <UtensilsCrossed className="w-5 h-5" />
           </div>
-          <h1 className="text-2xl font-black text-stone-900 tracking-tight">
-            Sign In to Bite<span className="text-brand-500">Sync</span>
+          <h1 className="text-xl font-semibold text-stone-900 tracking-tight">
+            Sign in to Bite<span className="text-brand-500">Sync</span>
           </h1>
-          <p className="text-xs text-stone-500 mt-1 font-medium">
-            Smart Hostel Canteen Pre-Ordering Platform
+          <p className="text-xs text-stone-500 mt-1">
+            Skip the queue. Sync your hostel meal.
           </p>
         </div>
 
-        {/* 1-Click Demo Login Selector for Evaluation */}
-        <div className="mb-6 p-3 bg-amber-50 rounded-2xl border border-amber-200/80">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-amber-800 text-center mb-2">
-            ⚡ Quick Demo Accounts (1-Click Login)
+        {/* Quiet 1-Click Demo Access */}
+        <div className="mb-6">
+          <p className="text-[11px] font-medium text-stone-400 text-center mb-2">
+            Quick demo access
           </p>
           <div className="grid grid-cols-3 gap-2">
-            <button
-              type="button"
-              onClick={() => handleQuickDemoLogin('student')}
-              className="px-2 py-2 bg-white hover:bg-brand-50 hover:border-brand-300 border border-amber-200 rounded-xl text-center transition-all group shadow-2xs"
-            >
-              <User className="w-4 h-4 mx-auto text-brand-600 mb-0.5 group-hover:scale-110 transition-transform" />
-              <span className="text-[11px] font-bold text-stone-800 block">Student</span>
-              <span className="text-[9px] text-stone-400 block">Aarav</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoLogin('kitchen')}
-              className="px-2 py-2 bg-white hover:bg-amber-100 hover:border-amber-300 border border-amber-200 rounded-xl text-center transition-all group shadow-2xs"
-            >
-              <ChefHat className="w-4 h-4 mx-auto text-amber-700 mb-0.5 group-hover:scale-110 transition-transform" />
-              <span className="text-[11px] font-bold text-stone-800 block">Kitchen</span>
-              <span className="text-[9px] text-stone-400 block">Chef</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoLogin('admin')}
-              className="px-2 py-2 bg-white hover:bg-purple-50 hover:border-purple-300 border border-amber-200 rounded-xl text-center transition-all group shadow-2xs"
-            >
-              <Shield className="w-4 h-4 mx-auto text-purple-600 mb-0.5 group-hover:scale-110 transition-transform" />
-              <span className="text-[11px] font-bold text-stone-800 block">Admin</span>
-              <span className="text-[9px] text-stone-400 block">Manager</span>
-            </button>
+            {[
+              { role: 'student', label: 'Student', sub: 'Aarav', icon: User },
+              { role: 'kitchen', label: 'Kitchen', sub: 'Chef', icon: ChefHat },
+              { role: 'admin', label: 'Admin', sub: 'Manager', icon: Shield },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.role}
+                  type="button"
+                  onClick={() => handleQuickDemoLogin(item.role)}
+                  className="px-2 py-2.5 bg-cream-50 hover:bg-stone-100/80 border border-stone-200/80 hover:border-stone-300 rounded-xl text-center transition-colors"
+                >
+                  <Icon className="w-3.5 h-3.5 mx-auto text-stone-600 mb-1" />
+                  <span className="text-xs font-medium text-stone-800 block">{item.label}</span>
+                  <span className="text-[10px] text-stone-400 block">{item.sub}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="relative mb-5">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-stone-100"></div>
+          </div>
+          <div className="relative flex justify-center text-[11px]">
+            <span className="bg-white px-2.5 text-stone-400">or continue with email</span>
+          </div>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-stone-600 block mb-1">
+            <label className="text-xs font-medium text-stone-600 block mb-1.5">
               Institutional Email
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
+              <Mail className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@bitesync.com"
-                className="w-full pl-10 pr-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium"
+                className="w-full pl-9 pr-3.5 py-2 bg-cream-50/70 border border-stone-200 rounded-lg text-sm text-stone-900 placeholder:text-stone-400 focus:bg-white focus:outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-200/60 transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-stone-600 block mb-1">
+            <label className="text-xs font-medium text-stone-600 block mb-1.5">
               Password
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
+              <Lock className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium"
+                className="w-full pl-9 pr-3.5 py-2 bg-cream-50/70 border border-stone-200 rounded-lg text-sm text-stone-900 placeholder:text-stone-400 focus:bg-white focus:outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-200/60 transition-colors"
               />
             </div>
           </div>
@@ -136,14 +135,14 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-brand-500 hover:bg-brand-600 active:scale-[0.99] text-white font-bold text-sm rounded-xl shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2 mt-2"
+            className="w-full py-2.5 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm rounded-lg transition-colors flex items-center justify-center gap-2 mt-2"
           >
             {loading ? (
-              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
             ) : (
               <>
-                <span>Sign In to BiteSync</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Sign In</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </>
             )}
           </button>
@@ -151,8 +150,8 @@ const LoginPage = () => {
 
         <div className="mt-6 text-center text-xs text-stone-500">
           New student?{' '}
-          <Link to="/register" className="font-bold text-brand-600 hover:text-brand-700">
-            Register your Hostel Profile
+          <Link to="/register" className="font-medium text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-600">
+            Create an account
           </Link>
         </div>
       </div>
@@ -161,4 +160,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

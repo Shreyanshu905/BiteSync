@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { useCart } from '../../context/CartContext';
 import api from '../../api/client';
 import FoodCard from '../../components/student/FoodCard';
 import StatusPill from '../../components/common/StatusPill';
@@ -14,14 +13,11 @@ import {
   QrCode,
   Calendar,
   Tag,
-  Flame,
   ChevronRight,
-  TrendingUp,
 } from 'lucide-react';
 
 const StudentDashboard = () => {
   const { user } = useAuth();
-  const { addToCart } = useCart();
   const [featuredDishes, setFeaturedDishes] = useState([]);
   const [activeOrders, setActiveOrders] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
@@ -42,11 +38,12 @@ const StudentDashboard = () => {
       ]);
 
       if (dishesRes.data.success) {
-        setFeaturedDishes(dishesRes.data.data.filter((d) => d.isFeatured || d.rating >= 4.8).slice(0, 4));
+        setFeaturedDishes(
+          dishesRes.data.data.filter((d) => d.isFeatured || d.rating >= 4.8).slice(0, 4)
+        );
       }
 
       if (ordersRes.data.success) {
-        // Active orders: placed, accepted, preparing, ready
         const active = ordersRes.data.data.filter((o) =>
           ['placed', 'accepted', 'preparing', 'ready'].includes(o.status)
         );
@@ -63,74 +60,73 @@ const StudentDashboard = () => {
     }
   };
 
-  // Meal window detector
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return { text: 'Good morning', meal: 'Breakfast', icon: '🌅' };
-    if (hour < 16) return { text: 'Good afternoon', meal: 'Lunch', icon: '☀️' };
-    if (hour < 19) return { text: 'Good evening', meal: 'Snacks', icon: '☕' };
-    if (hour < 22) return { text: 'Dinner time', meal: 'Dinner', icon: '🌙' };
-    return { text: 'Late night craving', meal: 'Late-Night Snacks', icon: '✨' };
+    if (hour < 12) return { text: 'Good morning', meal: 'Breakfast' };
+    if (hour < 16) return { text: 'Good afternoon', meal: 'Lunch' };
+    if (hour < 19) return { text: 'Good evening', meal: 'Evening Snacks' };
+    if (hour < 22) return { text: 'Good evening', meal: 'Dinner' };
+    return { text: 'Late night', meal: 'Late-Night Canteen' };
   };
 
   const greeting = getGreeting();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
-      {/* Hero Welcome Card */}
-      <div className="relative overflow-hidden rounded-3xl bg-linear-to-r from-stone-900 via-stone-800 to-stone-900 text-white p-6 sm:p-8 shadow-xl">
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-72 h-72 bg-brand-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      {/* Quiet Editorial Welcome Header */}
+      <section className="bg-white rounded-2xl border border-stone-200/80 p-6 sm:p-8 shadow-soft">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-800/80 border border-stone-700 text-amber-300 text-xs font-semibold">
-              <span>{greeting.icon}</span>
-              <span>{greeting.meal} Session Now Serving</span>
+            <div className="inline-flex items-center gap-2 text-xs font-medium text-stone-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600/80"></span>
+              <span>{greeting.meal} session open</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              {greeting.text}, {user?.name?.split(' ')[0]}! 👋
+            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-stone-900">
+              {greeting.text}, {user?.name?.split(' ')[0]}
             </h1>
-            <p className="text-stone-300 text-xs sm:text-sm max-w-xl font-normal">
-              Skip the long queues at the canteen counter. Pre-order your meals, select your slot, and collect with a quick QR scan.
+            <p className="text-stone-500 text-sm max-w-lg leading-relaxed">
+              Pre-order freshly prepared hostel meals, reserve a 15-minute pickup window, and collect with your QR pass.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
-            {/* Wallet Quick Card */}
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               to="/student/wallet"
-              className="p-4 bg-stone-800/90 hover:bg-stone-800 border border-stone-700 rounded-2xl flex items-center gap-3 transition-colors group"
+              className="px-4 py-2.5 bg-cream-50 hover:bg-stone-100/80 border border-stone-200/80 rounded-xl flex items-center gap-3 transition-colors"
             >
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Wallet className="w-5 h-5" />
-              </div>
+              <Wallet className="w-4 h-4 text-stone-500" />
               <div>
-                <p className="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Wallet Balance</p>
-                <p className="text-xl font-black text-white font-mono">₹{user?.walletBalance || 0}</p>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wider font-medium">Wallet</p>
+                <p className="text-sm font-semibold text-stone-900 tabular-nums">₹{user?.walletBalance || 0}</p>
               </div>
             </Link>
 
             <Link
               to="/student/menu"
-              className="px-5 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-lg shadow-brand-500/25 transition-all flex items-center gap-2"
+              className="px-5 py-3 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm rounded-xl transition-colors flex items-center gap-2"
             >
               <span>Explore Menu</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Active Order Spotlight / QR Pass Card */}
+      {/* Active Orders */}
       {activeOrders.length > 0 && (
-        <div className="space-y-3">
+        <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-500 animate-ping"></span>
-              Live Order in Progress ({activeOrders.length})
-            </h2>
-            <Link to="/student/orders" className="text-xs font-semibold text-brand-600 hover:text-brand-700">
-              View All Orders →
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-brand-500 radar-live"></span>
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+                Active Orders ({activeOrders.length})
+              </h2>
+            </div>
+            <Link
+              to="/student/orders"
+              className="text-xs font-medium text-stone-500 hover:text-stone-900 transition-colors"
+            >
+              View all orders →
             </Link>
           </div>
 
@@ -138,33 +134,37 @@ const StudentDashboard = () => {
             {activeOrders.map((order) => (
               <div
                 key={order._id}
-                className="bg-white rounded-3xl border border-amber-200/80 p-5 shadow-card hover:shadow-elevated transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-stone-200/80 p-5 shadow-soft hover:border-stone-300 transition-colors flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-start justify-between pb-3 border-b border-stone-100">
+                  <div className="flex items-start justify-between pb-3.5 border-b border-stone-100">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-extrabold text-base text-stone-900">
+                        <span className="font-semibold text-sm text-stone-900">
                           Order #{order.orderNumber}
                         </span>
-                        <span className="font-mono font-bold text-xs bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
+                        <span className="font-mono text-xs font-medium bg-stone-100 text-stone-700 px-2 py-0.5 rounded-md">
                           {order.pickupToken}
                         </span>
                       </div>
-                      <p className="text-xs text-stone-500 mt-1 flex items-center gap-1 font-medium">
+                      <p className="text-xs text-stone-500 mt-1 flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5 text-stone-400" />
-                        Pickup Window: {order.slotDisplay?.startTime} – {order.slotDisplay?.endTime}
+                        <span>
+                          Pickup {order.slotDisplay?.startTime} – {order.slotDisplay?.endTime}
+                        </span>
                       </p>
                     </div>
 
                     <StatusPill status={order.status} />
                   </div>
 
-                  <div className="py-3 text-xs text-stone-700 font-medium space-y-1">
+                  <div className="py-3.5 text-xs text-stone-600 space-y-1.5">
                     {order.items.map((i, idx) => (
                       <div key={idx} className="flex justify-between">
-                        <span>{i.name} × {i.quantity}</span>
-                        <span className="font-semibold text-stone-900">₹{i.subtotal}</span>
+                        <span>
+                          {i.name} <span className="text-stone-400">× {i.quantity}</span>
+                        </span>
+                        <span className="font-medium text-stone-800 tabular-nums">₹{i.subtotal}</span>
                       </div>
                     ))}
                   </div>
@@ -173,76 +173,77 @@ const StudentDashboard = () => {
                 <div className="pt-3 border-t border-stone-100 flex items-center gap-2">
                   <button
                     onClick={() => setSelectedQR(order)}
-                    className="flex-1 py-2.5 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-1.5"
+                    className="flex-1 py-2 bg-stone-900 hover:bg-stone-800 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5"
                   >
-                    <QrCode className="w-4 h-4 text-brand-400" />
-                    Show Counter QR Pass
+                    <QrCode className="w-3.5 h-3.5 text-stone-300" />
+                    Show QR Pass
                   </button>
 
                   <Link
                     to={`/student/orders/${order._id}`}
-                    className="px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold text-xs rounded-xl transition-colors"
+                    className="px-3.5 py-2 bg-cream-50 hover:bg-stone-100 text-stone-700 border border-stone-200/80 font-medium text-xs rounded-lg transition-colors"
                   >
-                    Track Live
+                    Track
                   </Link>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* Announcements & Offers Banner */}
+      {/* Subtle Announcements & Offers */}
       {announcements.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {announcements.map((ann) => (
             <div
               key={ann._id}
-              className="p-5 rounded-3xl bg-linear-to-r from-amber-50 to-orange-50 border border-amber-200/60 shadow-soft flex items-start gap-4"
+              className="p-4 sm:p-5 rounded-2xl bg-cream-100/70 border border-stone-200/75 flex items-start gap-3.5"
             >
-              <div className="w-10 h-10 rounded-2xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-                <Tag className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-white border border-stone-200/80 text-brand-600 flex items-center justify-center shrink-0">
+                <Tag className="w-4 h-4" />
               </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider bg-brand-100 text-brand-800 px-2 py-0.5 rounded-full">
-                    {ann.badgeText || 'Special Offer'}
+              <div className="space-y-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-medium text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
+                    {ann.badgeText || 'Notice'}
                   </span>
                   {ann.couponCode && (
-                    <span className="text-xs font-mono font-bold bg-white text-stone-900 px-2 py-0.5 rounded border border-amber-200">
-                      Use: {ann.couponCode}
+                    <span className="text-[11px] font-mono font-medium bg-white text-stone-700 px-2 py-0.5 rounded-md border border-stone-200/80">
+                      {ann.couponCode}
                     </span>
                   )}
                 </div>
-                <h4 className="font-bold text-sm text-stone-900">{ann.title}</h4>
-                <p className="text-xs text-stone-600 leading-relaxed">{ann.description}</p>
+                <h4 className="font-medium text-sm text-stone-900">{ann.title}</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">{ann.description}</p>
               </div>
             </div>
           ))}
-        </div>
+        </section>
       )}
 
-      {/* Popular & Featured Meals Section */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
+      {/* Popular Meals */}
+      <section className="space-y-4">
+        <div className="flex items-end justify-between">
           <div>
-            <h2 className="text-lg font-black text-stone-900 flex items-center gap-2">
-              <Flame className="w-5 h-5 text-brand-500" />
-              Popular in Campus Today
+            <h2 className="text-base font-semibold text-stone-900 tracking-tight">
+              Popular today
             </h2>
-            <p className="text-xs text-stone-500">Student favourites freshly prepared for today's meal sessions</p>
+            <p className="text-xs text-stone-500 mt-0.5">
+              Freshly prepared favourites from today's kitchen sessions
+            </p>
           </div>
           <Link
             to="/student/menu"
-            className="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1"
+            className="text-xs font-medium text-stone-600 hover:text-stone-900 flex items-center gap-0.5 transition-colors"
           >
-            <span>Full Menu</span>
-            <ChevronRight className="w-4 h-4" />
+            <span>Full menu</span>
+            <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
         {loading ? (
-          <div className="py-12 text-center text-xs text-stone-400">Loading dishes...</div>
+          <div className="py-12 text-center text-xs text-stone-400">Loading menu...</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {featuredDishes.map((dish) => (
@@ -250,48 +251,43 @@ const StudentDashboard = () => {
             ))}
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Mess Calendar & Group Ordering Highlights */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* Secondary Shortcuts */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link
           to="/student/calendar"
-          className="p-5 rounded-3xl bg-white border border-stone-100 shadow-soft hover:shadow-card transition-all flex flex-col justify-between group"
+          className="p-5 rounded-2xl bg-white border border-stone-200/80 hover:border-stone-300 shadow-soft transition-colors flex items-start justify-between gap-4 group"
         >
-          <div>
-            <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-              <Calendar className="w-5 h-5" />
+          <div className="space-y-1.5">
+            <div className="w-8 h-8 rounded-lg bg-cream-100 text-stone-600 flex items-center justify-center mb-2">
+              <Calendar className="w-4 h-4" />
             </div>
-            <h3 className="font-bold text-base text-stone-900">Weekly Mess Calendar</h3>
-            <p className="text-xs text-stone-500 mt-1 leading-relaxed">
-              Check upcoming breakfast, lunch, and dinner schedules for the whole week.
+            <h3 className="font-medium text-sm text-stone-900">Weekly Mess Calendar</h3>
+            <p className="text-xs text-stone-500 leading-relaxed">
+              View upcoming breakfast, lunch, and dinner schedules for the week.
             </p>
           </div>
-          <span className="text-xs font-bold text-amber-700 mt-4 flex items-center gap-1">
-            Check Calendar →
-          </span>
+          <ChevronRight className="w-4 h-4 text-stone-300 group-hover:text-stone-600 transition-colors mt-1 shrink-0" />
         </Link>
 
         <Link
           to="/student/group-order"
-          className="p-5 rounded-3xl bg-white border border-stone-100 shadow-soft hover:shadow-card transition-all flex flex-col justify-between group"
+          className="p-5 rounded-2xl bg-white border border-stone-200/80 hover:border-stone-300 shadow-soft transition-colors flex items-start justify-between gap-4 group"
         >
-          <div>
-            <div className="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-              <UtensilsCrossed className="w-5 h-5" />
+          <div className="space-y-1.5">
+            <div className="w-8 h-8 rounded-lg bg-cream-100 text-stone-600 flex items-center justify-center mb-2">
+              <UtensilsCrossed className="w-4 h-4" />
             </div>
-            <h3 className="font-bold text-base text-stone-900">Hostel Group Orders</h3>
-            <p className="text-xs text-stone-500 mt-1 leading-relaxed">
-              Order together with hostel roommates and pick up with a unified counter token.
+            <h3 className="font-medium text-sm text-stone-900">Hostel Group Orders</h3>
+            <p className="text-xs text-stone-500 leading-relaxed">
+              Order together with roommates and collect with a single pickup token.
             </p>
           </div>
-          <span className="text-xs font-bold text-brand-600 mt-4 flex items-center gap-1">
-            Start Group Meal →
-          </span>
+          <ChevronRight className="w-4 h-4 text-stone-300 group-hover:text-stone-600 transition-colors mt-1 shrink-0" />
         </Link>
-      </div>
+      </section>
 
-      {/* QR Code Pass Modal */}
       <QRCodeModal
         isOpen={!!selectedQR}
         onClose={() => setSelectedQR(null)}
@@ -302,4 +298,3 @@ const StudentDashboard = () => {
 };
 
 export default StudentDashboard;
-

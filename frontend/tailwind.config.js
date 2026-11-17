@@ -5,33 +5,33 @@ export default {
     extend: {
       colors: {
         cream: {
-          50: '#FDFCF9',
-          100: '#FAF6F0',
-          200: '#F5ECE1',
-          300: '#EDE0D0',
+          50: '#FAFAF8',
+          100: '#F4F3EF',
+          200: '#EAE8E1',
+          300: '#DFDDD4',
         },
         charcoal: {
-          800: '#262220',
-          900: '#1A1817',
-          950: '#11100F',
+          800: '#272523',
+          900: '#1C1B1A',
+          950: '#141312',
         },
         brand: {
-          50: '#FFF5F2',
-          100: '#FFE8E2',
-          200: '#FFD1C5',
-          300: '#FFAA95',
-          400: '#FF7A5C',
-          500: '#FF5C38', // Primary Coral
-          600: '#EE441E',
-          700: '#C83210',
-          800: '#9E280E',
-          900: '#7E2512',
+          50: '#FAF2EE',
+          100: '#F3E1D8',
+          200: '#E7C5B5',
+          300: '#D8A28B',
+          400: '#CE7C5C',
+          500: '#C45B35', // Muted Terracotta
+          600: '#AB4B28',
+          700: '#8F3D20',
+          800: '#74321B',
+          900: '#5D2917',
         },
       },
       fontFamily: {
         sans: [
-          'Plus Jakarta Sans',
           'Inter',
+          'Plus Jakarta Sans',
           '-apple-system',
           'BlinkMacSystemFont',
           'Segoe UI',
@@ -40,12 +40,11 @@ export default {
         ],
       },
       boxShadow: {
-        soft: '0 2px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02)',
-        card: '0 4px 20px -2px rgba(28, 25, 23, 0.06)',
-        elevated: '0 12px 32px -4px rgba(28, 25, 23, 0.12)',
+        soft: '0 1px 2px rgba(24, 24, 27, 0.03)',
+        card: '0 1px 3px rgba(24, 24, 27, 0.04), 0 1px 2px rgba(24, 24, 27, 0.02)',
+        elevated: '0 6px 20px -4px rgba(24, 24, 27, 0.07)',
       },
     },
   },
   plugins: [],
 };
-
