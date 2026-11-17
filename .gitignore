@@ -14,8 +14,11 @@ node_modules
 dist
 build
 .dist
+target/
+backend/target/
 data/
 backend/data/
+backend-node/data/
 
 # Logs
 npm-debug.log*
